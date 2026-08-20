@@ -717,11 +717,60 @@ export class ChannelStartupService {
   }
 
   public async fetchChats(query: any) {
-    // The PostgreSQL aggregate query below is not portable to all schemas
-    // restored from older Evolution installations. The Contact repository is
-    // the native source for chat JIDs and keeps findChats usable for imports.
     if (this.configService.get<Database>('DATABASE').PROVIDER === 'postgresql') {
-      return this.fetchContacts(query);
+      const remoteJid = query?.where?.remoteJid
+        ? query.where.remoteJid.includes('@')
+          ? query.where.remoteJid
+          : createJid(query.where.remoteJid)
+        : undefined;
+
+      const chats = await this.prismaRepository.chat.findMany({
+        where: { instanceId: this.instanceId, ...(remoteJid ? { remoteJid } : {}) },
+        orderBy: { updatedAt: 'desc' },
+        ...(query?.take ? { take: query.take } : {}),
+        ...(query?.page && query?.take ? { skip: query.take * (Math.max(query.page, 1) - 1) } : {}),
+      });
+
+      const [contacts, latestMessages] = await Promise.all([
+        this.prismaRepository.contact.findMany({ where: { instanceId: this.instanceId } }),
+        Promise.all(
+          chats.map((chat) =>
+            this.prismaRepository.message.findFirst({
+              where: {
+                instanceId: this.instanceId,
+                key: { path: ['remoteJid'], equals: chat.remoteJid },
+              },
+              orderBy: { messageTimestamp: 'desc' },
+              select: {
+                id: true, key: true, pushName: true, participant: true,
+                messageType: true, message: true, contextInfo: true,
+                source: true, messageTimestamp: true, instanceId: true,
+                status: true,
+              },
+            }),
+          ),
+        ),
+      ]);
+
+      const contactByJid = new Map(contacts.map((contact) => [contact.remoteJid, contact]));
+
+      return chats.map((chat, index) => {
+        const contact = contactByJid.get(chat.remoteJid);
+        const message = latestMessages[index];
+        return {
+          id: contact?.id ?? null,
+          remoteJid: chat.remoteJid,
+          pushName: contact?.pushName ?? chat.name,
+          profilePicUrl: contact?.profilePicUrl,
+          updatedAt: message ? new Date(message.messageTimestamp * 1000) : chat.updatedAt,
+          windowStart: chat.createdAt,
+          windowExpires: chat.createdAt ? new Date(chat.createdAt.getTime() + 86400000) : null,
+          windowActive: chat.createdAt ? chat.createdAt.getTime() + 86400000 > Date.now() : false,
+          lastMessage: message ? this.cleanMessageData(message) : undefined,
+          unreadCount: chat.unreadMessages,
+          isSaved: !!contact?.pushName || !!contact?.profilePicUrl,
+        };
+      });
     }
 
     const remoteJid = query?.where?.remoteJid
