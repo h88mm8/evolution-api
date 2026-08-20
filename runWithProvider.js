@@ -35,7 +35,7 @@ command = command.replace(migrationsPattern, migrationsFolder);
 
 // Prisma 7 usa prisma.config.ts para selecionar o schema e a URL.
 // O parâmetro --schema legado faz o CLI ignorar datasource.url da configuração.
-command = command.replace(/\\s--schema\\s+\\.\\/prisma\\/[^\\s]+-schema\\.prisma/g, '');
+command = command.replace(/\s--schema\s+\.\/prisma\/[^\s]+-schema\.prisma/g, '');
 
 if (command.includes('rmdir') && existsSync('prisma\\\\migrations')) {
   try {
