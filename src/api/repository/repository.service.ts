@@ -18,7 +18,7 @@ function createPrismaAdapter(connectionString: string) {
     return new PrismaMariaDb(connectionString);
   }
   // postgresql e psql_bouncer usam o adapter do Postgres
-  return new PrismaPg(connectionString);
+  return new PrismaPg({ connectionString }, { schema: 'evolution_api' });
 }
 
 export class PrismaRepository extends PrismaClient {
