@@ -870,322 +870,322 @@ CREATE UNIQUE INDEX IF NOT EXISTS "RuntimeConfig_key_key" ON "RuntimeConfig"("ke
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Session_sessionId_fkey"' AND conrelid = "Session"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Session_sessionId_fkey' AND conrelid = to_regclass('evolution_api."Session"')) THEN
     ALTER TABLE "Session" ADD CONSTRAINT "Session_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Chat_instanceId_fkey"' AND conrelid = "Chat"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Chat_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Chat"')) THEN
     ALTER TABLE "Chat" ADD CONSTRAINT "Chat_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Contact_instanceId_fkey"' AND conrelid = "Contact"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Contact_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Contact"')) THEN
     ALTER TABLE "Contact" ADD CONSTRAINT "Contact_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Message_instanceId_fkey"' AND conrelid = "Message"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Message_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Message"')) THEN
     ALTER TABLE "Message" ADD CONSTRAINT "Message_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Message_sessionId_fkey"' AND conrelid = "Message"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Message_sessionId_fkey' AND conrelid = to_regclass('evolution_api."Message"')) THEN
     ALTER TABLE "Message" ADD CONSTRAINT "Message_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "IntegrationSession"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"MessageUpdate_messageId_fkey"' AND conrelid = "MessageUpdate"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'MessageUpdate_messageId_fkey' AND conrelid = to_regclass('evolution_api."MessageUpdate"')) THEN
     ALTER TABLE "MessageUpdate" ADD CONSTRAINT "MessageUpdate_messageId_fkey" FOREIGN KEY ("messageId") REFERENCES "Message"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"MessageUpdate_instanceId_fkey"' AND conrelid = "MessageUpdate"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'MessageUpdate_instanceId_fkey' AND conrelid = to_regclass('evolution_api."MessageUpdate"')) THEN
     ALTER TABLE "MessageUpdate" ADD CONSTRAINT "MessageUpdate_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Webhook_instanceId_fkey"' AND conrelid = "Webhook"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Webhook_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Webhook"')) THEN
     ALTER TABLE "Webhook" ADD CONSTRAINT "Webhook_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Chatwoot_instanceId_fkey"' AND conrelid = "Chatwoot"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Chatwoot_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Chatwoot"')) THEN
     ALTER TABLE "Chatwoot" ADD CONSTRAINT "Chatwoot_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Label_instanceId_fkey"' AND conrelid = "Label"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Label_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Label"')) THEN
     ALTER TABLE "Label" ADD CONSTRAINT "Label_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Proxy_instanceId_fkey"' AND conrelid = "Proxy"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Proxy_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Proxy"')) THEN
     ALTER TABLE "Proxy" ADD CONSTRAINT "Proxy_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Setting_instanceId_fkey"' AND conrelid = "Setting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Setting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Setting"')) THEN
     ALTER TABLE "Setting" ADD CONSTRAINT "Setting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Rabbitmq_instanceId_fkey"' AND conrelid = "Rabbitmq"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Rabbitmq_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Rabbitmq"')) THEN
     ALTER TABLE "Rabbitmq" ADD CONSTRAINT "Rabbitmq_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Nats_instanceId_fkey"' AND conrelid = "Nats"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Nats_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Nats"')) THEN
     ALTER TABLE "Nats" ADD CONSTRAINT "Nats_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Sqs_instanceId_fkey"' AND conrelid = "Sqs"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Sqs_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Sqs"')) THEN
     ALTER TABLE "Sqs" ADD CONSTRAINT "Sqs_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Kafka_instanceId_fkey"' AND conrelid = "Kafka"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Kafka_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Kafka"')) THEN
     ALTER TABLE "Kafka" ADD CONSTRAINT "Kafka_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Websocket_instanceId_fkey"' AND conrelid = "Websocket"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Websocket_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Websocket"')) THEN
     ALTER TABLE "Websocket" ADD CONSTRAINT "Websocket_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Pusher_instanceId_fkey"' AND conrelid = "Pusher"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Pusher_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Pusher"')) THEN
     ALTER TABLE "Pusher" ADD CONSTRAINT "Pusher_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Typebot_instanceId_fkey"' AND conrelid = "Typebot"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Typebot_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Typebot"')) THEN
     ALTER TABLE "Typebot" ADD CONSTRAINT "Typebot_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"TypebotSetting_typebotIdFallback_fkey"' AND conrelid = "TypebotSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'TypebotSetting_typebotIdFallback_fkey' AND conrelid = to_regclass('evolution_api."TypebotSetting"')) THEN
     ALTER TABLE "TypebotSetting" ADD CONSTRAINT "TypebotSetting_typebotIdFallback_fkey" FOREIGN KEY ("typebotIdFallback") REFERENCES "Typebot"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"TypebotSetting_instanceId_fkey"' AND conrelid = "TypebotSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'TypebotSetting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."TypebotSetting"')) THEN
     ALTER TABLE "TypebotSetting" ADD CONSTRAINT "TypebotSetting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Media_messageId_fkey"' AND conrelid = "Media"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Media_messageId_fkey' AND conrelid = to_regclass('evolution_api."Media"')) THEN
     ALTER TABLE "Media" ADD CONSTRAINT "Media_messageId_fkey" FOREIGN KEY ("messageId") REFERENCES "Message"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Media_instanceId_fkey"' AND conrelid = "Media"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Media_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Media"')) THEN
     ALTER TABLE "Media" ADD CONSTRAINT "Media_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"OpenaiCreds_instanceId_fkey"' AND conrelid = "OpenaiCreds"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'OpenaiCreds_instanceId_fkey' AND conrelid = to_regclass('evolution_api."OpenaiCreds"')) THEN
     ALTER TABLE "OpenaiCreds" ADD CONSTRAINT "OpenaiCreds_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"OpenaiBot_openaiCredsId_fkey"' AND conrelid = "OpenaiBot"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'OpenaiBot_openaiCredsId_fkey' AND conrelid = to_regclass('evolution_api."OpenaiBot"')) THEN
     ALTER TABLE "OpenaiBot" ADD CONSTRAINT "OpenaiBot_openaiCredsId_fkey" FOREIGN KEY ("openaiCredsId") REFERENCES "OpenaiCreds"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"OpenaiBot_instanceId_fkey"' AND conrelid = "OpenaiBot"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'OpenaiBot_instanceId_fkey' AND conrelid = to_regclass('evolution_api."OpenaiBot"')) THEN
     ALTER TABLE "OpenaiBot" ADD CONSTRAINT "OpenaiBot_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"IntegrationSession_instanceId_fkey"' AND conrelid = "IntegrationSession"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'IntegrationSession_instanceId_fkey' AND conrelid = to_regclass('evolution_api."IntegrationSession"')) THEN
     ALTER TABLE "IntegrationSession" ADD CONSTRAINT "IntegrationSession_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"OpenaiSetting_openaiCredsId_fkey"' AND conrelid = "OpenaiSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'OpenaiSetting_openaiCredsId_fkey' AND conrelid = to_regclass('evolution_api."OpenaiSetting"')) THEN
     ALTER TABLE "OpenaiSetting" ADD CONSTRAINT "OpenaiSetting_openaiCredsId_fkey" FOREIGN KEY ("openaiCredsId") REFERENCES "OpenaiCreds"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"OpenaiSetting_openaiIdFallback_fkey"' AND conrelid = "OpenaiSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'OpenaiSetting_openaiIdFallback_fkey' AND conrelid = to_regclass('evolution_api."OpenaiSetting"')) THEN
     ALTER TABLE "OpenaiSetting" ADD CONSTRAINT "OpenaiSetting_openaiIdFallback_fkey" FOREIGN KEY ("openaiIdFallback") REFERENCES "OpenaiBot"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"OpenaiSetting_instanceId_fkey"' AND conrelid = "OpenaiSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'OpenaiSetting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."OpenaiSetting"')) THEN
     ALTER TABLE "OpenaiSetting" ADD CONSTRAINT "OpenaiSetting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Template_instanceId_fkey"' AND conrelid = "Template"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Template_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Template"')) THEN
     ALTER TABLE "Template" ADD CONSTRAINT "Template_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Dify_instanceId_fkey"' AND conrelid = "Dify"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Dify_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Dify"')) THEN
     ALTER TABLE "Dify" ADD CONSTRAINT "Dify_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"DifySetting_difyIdFallback_fkey"' AND conrelid = "DifySetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'DifySetting_difyIdFallback_fkey' AND conrelid = to_regclass('evolution_api."DifySetting"')) THEN
     ALTER TABLE "DifySetting" ADD CONSTRAINT "DifySetting_difyIdFallback_fkey" FOREIGN KEY ("difyIdFallback") REFERENCES "Dify"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"DifySetting_instanceId_fkey"' AND conrelid = "DifySetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'DifySetting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."DifySetting"')) THEN
     ALTER TABLE "DifySetting" ADD CONSTRAINT "DifySetting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"EvolutionBot_instanceId_fkey"' AND conrelid = "EvolutionBot"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'EvolutionBot_instanceId_fkey' AND conrelid = to_regclass('evolution_api."EvolutionBot"')) THEN
     ALTER TABLE "EvolutionBot" ADD CONSTRAINT "EvolutionBot_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"EvolutionBotSetting_botIdFallback_fkey"' AND conrelid = "EvolutionBotSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'EvolutionBotSetting_botIdFallback_fkey' AND conrelid = to_regclass('evolution_api."EvolutionBotSetting"')) THEN
     ALTER TABLE "EvolutionBotSetting" ADD CONSTRAINT "EvolutionBotSetting_botIdFallback_fkey" FOREIGN KEY ("botIdFallback") REFERENCES "EvolutionBot"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"EvolutionBotSetting_instanceId_fkey"' AND conrelid = "EvolutionBotSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'EvolutionBotSetting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."EvolutionBotSetting"')) THEN
     ALTER TABLE "EvolutionBotSetting" ADD CONSTRAINT "EvolutionBotSetting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Flowise_instanceId_fkey"' AND conrelid = "Flowise"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Flowise_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Flowise"')) THEN
     ALTER TABLE "Flowise" ADD CONSTRAINT "Flowise_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"FlowiseSetting_flowiseIdFallback_fkey"' AND conrelid = "FlowiseSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'FlowiseSetting_flowiseIdFallback_fkey' AND conrelid = to_regclass('evolution_api."FlowiseSetting"')) THEN
     ALTER TABLE "FlowiseSetting" ADD CONSTRAINT "FlowiseSetting_flowiseIdFallback_fkey" FOREIGN KEY ("flowiseIdFallback") REFERENCES "Flowise"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"FlowiseSetting_instanceId_fkey"' AND conrelid = "FlowiseSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'FlowiseSetting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."FlowiseSetting"')) THEN
     ALTER TABLE "FlowiseSetting" ADD CONSTRAINT "FlowiseSetting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"N8n_instanceId_fkey"' AND conrelid = "N8n"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'N8n_instanceId_fkey' AND conrelid = to_regclass('evolution_api."N8n"')) THEN
     ALTER TABLE "N8n" ADD CONSTRAINT "N8n_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"N8nSetting_n8nIdFallback_fkey"' AND conrelid = "N8nSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'N8nSetting_n8nIdFallback_fkey' AND conrelid = to_regclass('evolution_api."N8nSetting"')) THEN
     ALTER TABLE "N8nSetting" ADD CONSTRAINT "N8nSetting_n8nIdFallback_fkey" FOREIGN KEY ("n8nIdFallback") REFERENCES "N8n"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"N8nSetting_instanceId_fkey"' AND conrelid = "N8nSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'N8nSetting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."N8nSetting"')) THEN
     ALTER TABLE "N8nSetting" ADD CONSTRAINT "N8nSetting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"Evoai_instanceId_fkey"' AND conrelid = "Evoai"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'Evoai_instanceId_fkey' AND conrelid = to_regclass('evolution_api."Evoai"')) THEN
     ALTER TABLE "Evoai" ADD CONSTRAINT "Evoai_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"EvoaiSetting_evoaiIdFallback_fkey"' AND conrelid = "EvoaiSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'EvoaiSetting_evoaiIdFallback_fkey' AND conrelid = to_regclass('evolution_api."EvoaiSetting"')) THEN
     ALTER TABLE "EvoaiSetting" ADD CONSTRAINT "EvoaiSetting_evoaiIdFallback_fkey" FOREIGN KEY ("evoaiIdFallback") REFERENCES "Evoai"("id") ON DELETE SET NULL ON UPDATE CASCADE;
   END IF;
 END $$;
 
 -- AddForeignKey
 DO $$ BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = '"EvoaiSetting_instanceId_fkey"' AND conrelid = "EvoaiSetting"::regclass) THEN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'EvoaiSetting_instanceId_fkey' AND conrelid = to_regclass('evolution_api."EvoaiSetting"')) THEN
     ALTER TABLE "EvoaiSetting" ADD CONSTRAINT "EvoaiSetting_instanceId_fkey" FOREIGN KEY ("instanceId") REFERENCES "Instance"("id") ON DELETE CASCADE ON UPDATE CASCADE;
   END IF;
 END $$;
