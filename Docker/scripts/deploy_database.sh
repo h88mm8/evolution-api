@@ -19,6 +19,16 @@ if [[ "$DATABASE_PROVIDER" == "postgresql" || "$DATABASE_PROVIDER" == "mysql" ||
         else
             echo "RuntimeConfig integrity check succeeded"
         fi
+
+        # The repair migration previously failed after partially finding an existing FK.
+        # Remove only its failed bookkeeping row so Prisma can rerun the idempotent repair.
+        printf '%s\n' 'DELETE FROM "evolution_api"."_prisma_migrations" WHERE migration_name = '\''20260820220000_repair_missing_application_schema'\'' AND finished_at IS NULL;' | npx prisma db execute --stdin
+        if [ $? -ne 0 ]; then
+            echo "Failed migration bookkeeping cleanup failed"
+            exit 1
+        else
+            echo "Failed migration bookkeeping cleanup succeeded"
+        fi
     fi
 
     npm run db:deploy
