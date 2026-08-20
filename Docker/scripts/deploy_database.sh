@@ -13,8 +13,8 @@ if [[ "$DATABASE_PROVIDER" == "postgresql" || "$DATABASE_PROVIDER" == "mysql" ||
 
     if [[ "$DATABASE_PROVIDER" == "postgresql" ]]; then
         printf '%s\n' \
-            'CREATE TABLE IF NOT EXISTS "evolution_api"."RuntimeConfig" ("id" SERIAL NOT NULL, "key" VARCHAR(100) NOT NULL, "value" TEXT NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "updatedAt" TIMESTAMP NOT NULL, CONSTRAINT "RuntimeConfig_pkey" PRIMARY KEY ("id"));' \
-            'CREATE UNIQUE INDEX IF NOT EXISTS "RuntimeConfig_key_key" ON "evolution_api"."RuntimeConfig"("key");' \
+            'CREATE TABLE IF NOT EXISTS "public"."RuntimeConfig" ("id" SERIAL NOT NULL, "key" VARCHAR(100) NOT NULL, "value" TEXT NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "updatedAt" TIMESTAMP NOT NULL, CONSTRAINT "RuntimeConfig_pkey" PRIMARY KEY ("id"));' \
+            'CREATE UNIQUE INDEX IF NOT EXISTS "RuntimeConfig_key_key" ON "public"."RuntimeConfig"("key");' \
             | npx prisma db execute --stdin
         if [ $? -ne 0 ]; then
             echo "RuntimeConfig integrity check failed"
