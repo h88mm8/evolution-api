@@ -717,6 +717,13 @@ export class ChannelStartupService {
   }
 
   public async fetchChats(query: any) {
+    // The PostgreSQL aggregate query below is not portable to all schemas
+    // restored from older Evolution installations. The Contact repository is
+    // the native source for chat JIDs and keeps findChats usable for imports.
+    if (this.configService.get<Database>('DATABASE').PROVIDER === 'postgresql') {
+      return this.fetchContacts(query);
+    }
+
     const remoteJid = query?.where?.remoteJid
       ? query?.where?.remoteJid.includes('@')
         ? query.where?.remoteJid
