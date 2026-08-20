@@ -16,6 +16,11 @@ const schemaFile =
       ? 'psql_bouncer-schema.prisma'
       : 'postgresql-schema.prisma';
 
+const databaseUrl = env('DATABASE_CONNECTION_URI');
+const databaseUrlWithSchema = databaseUrl.includes('schema=')
+  ? databaseUrl
+  : `${databaseUrl}${databaseUrl.includes('?') ? '&' : '?'}schema=evolution_api`;
+
 export default defineConfig({
   schema: path.join('prisma', schemaFile),
   // Os scripts db:* copiam as migrations do provider ativo para prisma/migrations
@@ -23,6 +28,6 @@ export default defineConfig({
     path: path.join('prisma', 'migrations'),
   },
   datasource: {
-    url: env('DATABASE_CONNECTION_URI'),
+    url: databaseUrlWithSchema,
   },
 });
