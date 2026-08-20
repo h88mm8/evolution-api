@@ -14,8 +14,6 @@ datasource db {
   provider = "postgresql"
 }
 
-@@schema("evolution_api")
-
 enum InstanceConnectionStatus {
   open
   close
