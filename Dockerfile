@@ -12,6 +12,7 @@ WORKDIR /evolution
 COPY ./package*.json ./
 COPY ./tsconfig.json ./
 COPY ./tsup.config.ts ./
+COPY ./prisma.config.ts ./prisma.config.ts
 COPY ./patches ./patches
 
 RUN npm ci --silent
@@ -65,6 +66,7 @@ COPY --from=builder /evolution/.env ./.env
 COPY --from=builder /evolution/Docker ./Docker
 COPY --from=builder /evolution/runWithProvider.js ./runWithProvider.js
 COPY --from=builder /evolution/tsup.config.ts ./tsup.config.ts
+COPY --from=builder /evolution/prisma.config.ts ./prisma.config.ts
 
 ENV DOCKER_ENV=true
 
