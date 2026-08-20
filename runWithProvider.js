@@ -33,15 +33,19 @@ let command = process.argv
 const migrationsPattern = new RegExp(`${databaseProviderDefault}-migrations`, 'g');
 command = command.replace(migrationsPattern, migrationsFolder);
 
-if (command.includes('rmdir') && existsSync('prisma\\migrations')) {
+// Prisma 7 usa prisma.config.ts para selecionar o schema e a URL.
+// O parâmetro --schema legado faz o CLI ignorar datasource.url da configuração.
+command = command.replace(/\\s--schema\\s+\\.\\/prisma\\/[^\\s]+-schema\\.prisma/g, '');
+
+if (command.includes('rmdir') && existsSync('prisma\\\\migrations')) {
   try {
-    execSync('rmdir /S /Q prisma\\migrations', { stdio: 'inherit' });
+    execSync('rmdir /S /Q prisma\\\\migrations', { stdio: 'inherit' });
   } catch (error) {
-    console.error(`Error removing directory: prisma\\migrations`);
+    console.error(`Error removing directory: prisma\\\\migrations`);
     process.exit(1);
   }
 } else if (command.includes('rmdir')) {
-  console.warn(`Directory 'prisma\\migrations' does not exist, skipping removal.`);
+  console.warn(`Directory 'prisma\\\\migrations' does not exist, skipping removal.`);
 }
 
 try {
