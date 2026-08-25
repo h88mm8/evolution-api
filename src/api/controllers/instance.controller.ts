@@ -37,6 +37,9 @@ export class InstanceController {
   public async createInstance(instanceData: InstanceDto) {
     try {
       instanceData.instanceName = instanceData.instanceName?.trim();
+      if (!instanceData.instanceName) {
+        throw new BadRequestException('"instanceName" not provided.');
+      }
 
       const instance = channelController.init(instanceData, {
         configService: this.configService,
