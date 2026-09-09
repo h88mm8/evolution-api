@@ -770,3 +770,5 @@ model RuntimeConfig {
   createdAt DateTime @default(now()) @db.Timestamp
   updatedAt DateTime @updatedAt @db.Timestamp
 }
+
+@@schema("evolution_api")
